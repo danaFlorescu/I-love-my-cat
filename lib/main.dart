@@ -29,11 +29,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  double _counter = 0;
+  String _textAnswer = "";
 
-  void _incrementCounter() {
+  void _isItCorrect() {
     setState(() {
-      _counter++;
+      if (_counter == 100) {
+        _textAnswer = "You are absolutely right!";
+      } else {
+        _textAnswer = "Try again!";
+      }
     });
   }
 
@@ -53,17 +58,28 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'How much do you think I love my cat?',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            // Text(
+            //   '$_counter',
+            //   style: Theme.of(context).textTheme.headline4,
+            // ),
+            Slider(
+              min: 0,
+              max: 100,
+              value: _counter,
+              onChanged: (newValue) {
+                setState(() {
+                  _counter = newValue;
+                });
+              },
             ),
+            Text(_textAnswer),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        onPressed: _isItCorrect,
+        // tooltip: 'Increment',
+        child: const Icon(Icons.check),
       ),
     );
   }
