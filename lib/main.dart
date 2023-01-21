@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,7 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
@@ -35,6 +36,11 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         _textAnswer = "Try again!";
       }
+    });
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        _textAnswer = "";
+      });
     });
   }
 
